@@ -34,25 +34,39 @@ public class Hostel{
 		   try{
 	             BufferedReader br = new BufferedReader(new FileReader("hostel.txt"));
 	               String line = null;
-	            
+	       
 	               //write your code here !!!
 	               while ((line = br.readLine()) != null) {
 		               String[] splited = line.split("\\s+");
 		               String checkName = splited[0];
+		               if(name==checkName) {
+		            	   return true;
+		               }
+		               
+		            	   return false;
+		               
+		            
 		               //write your code here !!!
 //		               compare check name with name and return true if present and false if not
 	               }
-	               
+	              
 	               
 	            }catch(Exception e){
 	                System.out.println(e);
 	            }
 			return true;
+			
 	   }
        public static void allotHostel(){
-    	   //write your code here!!!
-    	   
-       }
+    	   try {
+    		   writedata();
+    	   }
+    	   catch(Exception e){
+    		   System.out.println(e);
+    	   }
+    	         }
+    	  
+       
 
        public static boolean verifyStudent(int regNo){
          try{
@@ -73,15 +87,31 @@ public class Hostel{
         }
            
        public static boolean verifyName(String name){
-    	   boolean chk = true;
-    	   
+    	   boolean chk =false;
+    	   try{
+               BufferedReader br = new BufferedReader(new FileReader("hostel.txt"));
+                 String line = null;
+              while ((line = br.readLine()) != null) {
+                  String[] splited = line.split("\\s+");
+
+                  String reg = (name);
+                      if(splited[0].equals(reg) ){
+                          chk =  true;
+                      }
+                  }
+              }catch(Exception e){
+                  System.out.println(e);
+              }
+             
+              return chk;
+          }    	     
+    	      
     	   //write your code here
     	   
-    	   return chk;
-        }
+    	         
         
 
-		static String typeName(){
+		public static String typeName(){
             Scanner sc = new Scanner(System.in);
             String name;
             System.out.println("Enter the student name:(Type exit to exit) ");
@@ -109,7 +139,7 @@ public class Hostel{
             boolean checkStu = verifyStudent(regNo);
             boolean checkName = verifyName(name);
 
-            if(!(checkStu && checkName)){
+            if(name.equals(checkStu && checkName)){
                 System.out.println("User already alloted Hostel!!");
                 name = typeName();
                 continue;
